@@ -30,7 +30,7 @@ function new_day {
     local padded_day=$(printf "%02d" $day)
     local domain="adventofcode.com"
     local input_url="https://$domain/$year/day/$day/input"
-    
+
     # Create directory structure
     local day_dir="$year/day$padded_day"
     mkdir -p $day_dir
@@ -53,8 +53,15 @@ function new_day {
     if [ ! -f $solution_file ]; then
         cp utilities/template.kt $solution_file
         # Update package and file names
-        sed -i "s/YEAR/$year/g" $solution_file
-        sed -i "s/DAY/$padded_day/g" $solution_file
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # macOS
+            sed -i '' "s/YEAR/$year/g" $solution_file
+            sed -i '' "s/DAY/$padded_day/g" $solution_file
+        else
+            # Linux/Unix
+            sed -i "s/YEAR/$year/g" $solution_file
+            sed -i "s/DAY/$padded_day/g" $solution_file
+        fi
         echo "Created Kotlin solution file: $solution_file"
     fi
 
@@ -62,8 +69,15 @@ function new_day {
     if [ ! -f $test_file ]; then
         cp utilities/template_test.kt $test_file
         # Update package and file names
-        sed -i "s/YEAR/$year/g" $test_file
-        sed -i "s/DAY/$padded_day/g" $test_file
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # macOS
+            sed -i '' "s/YEAR/$year/g" $test_file
+            sed -i '' "s/DAY/$padded_day/g" $test_file
+        else
+            # Linux/Unix
+            sed -i "s/YEAR/$year/g" $test_file
+            sed -i "s/DAY/$padded_day/g" $test_file
+        fi
         echo "Created test file: $test_file"
     fi
 }
@@ -72,7 +86,7 @@ function new_day_input_file {
     local input_url=$1
     local cookie_val=$2
     local output_file=$3
-    
+
     if ! curl "$input_url" --compressed -H "Cookie: session=${cookie_val}" -o "$output_file" --fail; then
         echo "Failed to fetch Advent of Code input! Could not create $output_file"
         rm -f "$output_file"
