@@ -4,7 +4,7 @@
 
 My attempt at Advent of Code 2024, brushing up on Kotlin while at it
 
-**Disclaimer:** `input.txt`(s) have been omitted after the fact once I was made aware [they are not to be publicly shared](https://adventofcode.com/about#faq_copying).
+**Disclaimer:** `input.txt`(s) have been omitted as I was made aware that [they are not to be publicly shared](https://adventofcode.com/about#faq_copying).
 
 ## Table of Contents
 
