@@ -1,6 +1,7 @@
 # 🎄 Advent of Code 2024 📅
 
 ![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+
 My attempt at Advent of Code 2024, brushing up on Kotlin while at it
 
 **Disclaimer:** `input.txt`(s) have been omitted after the fact once I was made aware [they are not to be publicly shared](https://adventofcode.com/about#faq_copying).
