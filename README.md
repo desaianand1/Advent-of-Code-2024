@@ -83,7 +83,15 @@ Paste your session cookie data into a newly created `.env` file. (`.env.example`
 To run the code for day `d`, execute the following, replacing `<d>` with the specific day (e.g. 1 - 25)
 
 ```sh
-./gradlew run --args="<d>"  # e.g. ./gradlew run --args="1"
+# Run a specific day
+./gradlew day -Pyear=2024 -Pday=1
+
+# For single-digit days, both formats work:
+./gradlew day -Pyear=2024 -Pday=1
+./gradlew day -Pyear=2024 -Pday=01
+
+# List all implemented solutions
+./gradlew listSolutions
 ```
 
 ### Testing <a name="testing"></a>
@@ -92,5 +100,5 @@ Solutions are verified against known answers using JUnit tests. To run tests:
 
 ```sh
 ./gradlew test              # Run all tests
-./gradlew test --tests "aoc2024.Day01Test"  # Run specific day's tests
+./gradlew test --tests "aoc2024.day01.*"  # Run specific day's tests
 ```

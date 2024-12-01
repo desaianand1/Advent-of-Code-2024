@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "2.1.0"
     application
 }
 
-group = "com.example"
-version = "1.0-SNAPSHOT"
+group = "aoc24"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -15,11 +15,10 @@ repositories {
 dependencies {
     // Testing
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.3")
     
-    // Useful utilities
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("com.google.code.gson:gson:2.10.1")  // For JSON parsing if needed
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation("com.google.code.gson:gson:2.11.0")
 }
 
 tasks.test {
@@ -34,13 +33,25 @@ sourceSets {
     main {
         kotlin.srcDirs(
             "utilities",
-            "2024"
+            // Include all year directories dynamically
+            fileTree(".")
+                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
+                .map { it.name }
+        )
+        resources.srcDirs(
+            // Same for resources
+            fileTree(".")
+                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
+                .map { it.name }
         )
     }
     test {
         kotlin.srcDirs(
             "utilities",
-            "2024"
+            // And for test sources
+            fileTree(".")
+                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
+                .map { it.name }
         )
     }
 }
@@ -49,15 +60,48 @@ sourceSets {
 tasks.register<JavaExec>("day") {
     description = "Run a specific day's solution. Usage: ./gradlew day -Pyear=2024 -Pday=1"
     
-    mainClass.set("aoc${project.findProperty("year") ?: "2024"}.day${String.format("%02d", (project.findProperty("day") as String? ?: "1").toInt())}.SolutionKt")
+    dependsOn("classes")
     
+    val year = project.findProperty("year")?.toString() ?: throw GradleException(
+        "Year parameter is required. Use -Pyear=YYYY (e.g., -Pyear=2024)"
+    )
+    val day = (project.findProperty("day")?.toString() ?: throw GradleException(
+        "Day parameter is required. Use -Pday=DD (e.g., -Pday=1)"
+    )).padStart(2, '0')
+    
+    // Verify year format
+    require(year.matches(Regex("\\d{4}"))) { "Year must be in YYYY format" }
+    // Verify day is between 1 and 25
+    require(day.toInt() in 1..25) { "Day must be between 1 and 25" }
+    
+    mainClass.set("aoc$year.day$day.SolutionKt")
     classpath = sourceSets["main"].runtimeClasspath
-    
-    // Enable standard input in case it's needed for any solutions
     standardInput = System.`in`
+    
+    doFirst {
+        println("Running Year $year Day $day solution...")
+    }
 }
 
-// Default run task configuration
-application {
-    mainClass.set("aoc2024.day01.SolutionKt") // Default to day 1 if no specific day is provided
+// Add a task to list all implemented solutions
+tasks.register("listSolutions") {
+    description = "List all implemented solutions"
+    
+    doLast {
+        val solutions = fileTree(".")
+            .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
+            .flatMap { year ->
+                fileTree(year.path)
+                    .filter { it.isDirectory && it.name.matches(Regex("day\\d{2}")) }
+                    .map { day -> "${year.name}/${day.name}" }
+            }
+            .sorted()
+        
+        if (solutions.isEmpty()) {
+            println("No solutions implemented yet!")
+        } else {
+            println("Implemented solutions:")
+            solutions.forEach { println("- $it") }
+        }
+    }
 }
