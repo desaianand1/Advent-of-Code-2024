@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "mathiasfrohlich.kotlin"
+        "mathiasfrohlich.kotlin",
+        "vscjava.vscode-gradle"
     ]
 }
