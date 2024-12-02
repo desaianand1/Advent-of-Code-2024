@@ -16,7 +16,6 @@ repositories {
 dependencies {
     // Testing
     testImplementation(kotlin("test"))
-    
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("com.google.code.gson:gson:2.11.0")
 }
@@ -47,28 +46,29 @@ kotlin {
 sourceSets {
     main {
         kotlin {
-            // Only utilities and solution files
-            srcDir("utilities")
-            srcDir(fileTree(".") {
-                include("*/day*/solution.kt")
-                exclude("utilities/**")  // Ensure we don't double-include utilities
-                exclude("*/day*/test.kt")  // Explicitly exclude test files
-                exclude("**/template*.kt")  // Exclude templates
-            }.map { it.parent })
+            srcDirs("utilities", ".")
+            exclude(
+                "**/test/**",
+                "template/**",
+                ".gradle/**",
+                "build/**"
+            )
+            include(
+                "*/day*/solution.kt",
+                "utilities/**"
+            )
         }
         resources {
-            srcDir(fileTree(".") {
-                include("*/day*/input.txt")
-            }.map { it.parent })
+            srcDir(".")
+            include("*/day*/input.txt")
+            exclude("**/test/**")
         }
     }
     test {
         kotlin {
-            // Only test files
-            srcDir(fileTree(".") {
-                include("*/day*/test.kt")
-                exclude("**/template*.kt")
-            }.map { it.parent })
+            srcDir(".")
+            include("*/day*/test/test.kt")
+            exclude("template/**")
         }
     }
 }
@@ -97,28 +97,5 @@ tasks.register<JavaExec>("day") {
     
     doFirst {
         println("Running Year $year Day $day solution...")
-    }
-}
-
-// Add a task to list all implemented solutions
-tasks.register("listSolutions") {
-    description = "List all implemented solutions"
-    
-    doLast {
-        val solutions = fileTree(".")
-            .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
-            .flatMap { year ->
-                fileTree(year.path)
-                    .filter { it.isDirectory && it.name.matches(Regex("day\\d{2}")) }
-                    .map { day -> "${year.name}/${day.name}" }
-            }
-            .sorted()
-        
-        if (solutions.isEmpty()) {
-            println("No solutions implemented yet!")
-        } else {
-            println("Implemented solutions:")
-            solutions.forEach { println("- $it") }
-        }
     }
 }
