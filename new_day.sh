@@ -1,21 +1,28 @@
 #!/bin/bash
 
-# Parse command-line arguments
-# Check if two arguments are provided
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <yyyy> <d>"
-    exit 1
-fi
-
-# Parse and validate the arguments
-selected_year=$1
+# Default to 2024 if no year provided
+selected_year=${1:-2024}
 if ! [[ $selected_year =~ ^[0-9]{4}$ ]]; then
     echo "Error: Invalid year format. Please provide a 4-digit year (yyyy)."
     exit 1
 fi
 
-# Parse and validate the second argument (day)
-selected_day=$2
+# If no day provided, use current day if it's during AoC (Dec 1-25)
+if [ -z "$2" ]; then
+    current_month=$(date +%-m)
+    current_day=$(date +%-d)
+
+    if [ "$current_month" -eq 12 ] && [ "$current_day" -le 25 ]; then
+        selected_day=$current_day
+    else
+        echo "Error: No day provided and current date is not during Advent of Code (December 1-25)."
+        echo "Please provide a day number between 1 and 25."
+        exit 1
+    fi
+else
+    selected_day=$2
+fi
+
 if ! [[ $selected_day =~ ^[1-9]$|^1[0-9]$|^2[0-5]$ ]]; then
     echo "Error: Invalid day format. Please provide a valid day (1-25)."
     exit 1
@@ -33,12 +40,13 @@ function new_day {
 
     # Create directory structure
     local day_dir="$year/day$padded_day"
-    mkdir -p $day_dir
+    local test_dir="$day_dir/test"
+    mkdir -p $day_dir/test
 
     # Define file paths
     local input_file="$day_dir/input.txt"
     local solution_file="$day_dir/solution.kt"
-    local test_file="$day_dir/test.kt"
+    local test_file="$day_dir/test/test.kt"
 
     if [ -f $input_file ]; then
         echo "Cannot create input file since $input_file already exists!"
@@ -51,7 +59,7 @@ function new_day {
 
     # Create Kotlin solution file from template
     if [ ! -f $solution_file ]; then
-        cp utilities/template.kt $solution_file
+        cp templates/soln_template.kt $solution_file
         # Update package and file names
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # macOS
@@ -67,7 +75,7 @@ function new_day {
 
     # Create test file from template
     if [ ! -f $test_file ]; then
-        cp utilities/template_test.kt $test_file
+        cp templates/test_template.kt $test_file
         # Update package and file names
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # macOS
