@@ -5,5 +5,8 @@ import java.io.File
 /**
  * Reads lines from the given input txt file.
  */
-fun readInput(path: String) = File(path).readLines()
+public fun readInput(path: String): List<String> = File(path)
+    .takeIf { it.exists() }
+    ?.readLines()
+    ?: emptyList()
 

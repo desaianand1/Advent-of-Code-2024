@@ -47,6 +47,7 @@ function new_day {
     local input_file="$day_dir/input.txt"
     local solution_file="$day_dir/solution.kt"
     local test_file="$day_dir/test/test.kt"
+    local test_input_file="$day_dir/test/test_input.txt"
 
     if [ -f $input_file ]; then
         echo "Cannot create input file since $input_file already exists!"
@@ -87,6 +88,14 @@ function new_day {
             sed -i "s/DAY/$padded_day/g" $test_file
         fi
         echo "Created test file: $test_file"
+    fi
+
+     # Create test input file if it doesn't exist
+    if [ ! -f $test_input_file ]; then
+        # Create an empty test input file that can be filled with example data
+        touch $test_input_file
+        echo "Created test input file: $test_input_file"
+        echo "Remember to add example input data to $test_input_file"
     fi
 }
 

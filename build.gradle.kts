@@ -49,11 +49,11 @@ sourceSets {
                 "**/test/**",
                 "template/**",
                 ".gradle/**",
-                "build/**",
+                "build/**"
             )
             include(
                 "*/day*/solution.kt",
-                "utilities/**",
+                "utilities/**"
             )
         }
         resources {
@@ -67,6 +67,10 @@ sourceSets {
             srcDir(".")
             include("*/day*/test/test.kt")
             exclude("template/**")
+        }
+        resources {
+            srcDir(".")
+            include("*/day*/test/test_input.txt")
         }
     }
 }
