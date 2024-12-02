@@ -9,4 +9,3 @@ public fun readInput(path: String): List<String> = File(path)
     .takeIf { it.exists() }
     ?.readLines()
     ?: emptyList()
-

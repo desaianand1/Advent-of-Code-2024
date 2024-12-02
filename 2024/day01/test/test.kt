@@ -5,14 +5,8 @@ import utilities.readInput
 import kotlin.test.assertEquals
 
 class Day01Test {
-    private val testInput =
-        """
-        4   3
-        2   5
-        1   3
-        3   9
-        3   3
-        """.trimIndent().split("\n")
+    private val testInput = readInput("2024/day01/test/test_input.txt")
+    private val realInput = readInput("2024/day01/input.txt")
 
     @Test
     fun `Part 1 with test input`() {

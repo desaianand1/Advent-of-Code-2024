@@ -49,6 +49,25 @@ I solved all of this year's problems in Kotlin. To get started, you'll need to f
 - [Kotlin 2.1 or later](https://kotlinlang.org/docs/getting-started.html)
 - [Gradle 8.11 or later](https://gradle.org/install/)
 
+### Git Hooks
+
+This project uses Git hooks to ensure code quality. To install the hooks:
+
+```bash
+# Make the install script executable
+chmod +x setup/install-hooks.sh
+
+# Install the hooks
+./setup/install-hooks.sh
+```
+
+The pre-commit hook will:
+
+1. Format all Kotlin files using ktlint
+2. Run all tests
+3. Prevent commit if either step fails
+4. Show modified files if formatting changed anything
+
 ### 🍪 Session Cookies <a name="cookie"></a>
 
 The `new_day.ps1` (or `new_day.sh`, depending on your platform) script uses Advent of Code's authentication [session cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) to auto-fetch the day's input for the current year.

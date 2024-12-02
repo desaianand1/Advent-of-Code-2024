@@ -1,45 +1,35 @@
 name: Lint
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    types: [ closed ]
+    types: [opened, synchronize, reopened]
     branches: [ main ]
 
 jobs:
-  should-run:
-    runs-on: ubuntu-latest
-    outputs:
-      should-run: ${{ steps.check.outputs.should-run }}
-    steps:
-      - id: check
-        run: |
-          if [[ "${{ github.event_name }}" == "push" ]] || \
-             [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
-            echo "should-run=true" >> $GITHUB_OUTPUT
-          else
-            echo "should-run=false" >> $GITHUB_OUTPUT
-          fi
-
-  setup:
-    needs: should-run
-    if: needs.should-run.outputs.should-run == 'true'
-    uses: ./.github/workflows/reusable-steps.yml
-
   lint:
-    needs: [should-run, setup]
-    if: needs.should-run.outputs.should-run == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
         
       - name: Check code formatting
-        run: ./gradlew ktlintCheck
+        run: ./gradlew spotlessCheck
         
-      - name: Upload ktlint results
+      - name: Upload spotless results
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
-          name: ktlint-report
-          path: build/reports/ktlint/
+          name: spotless-report
+          path: build/reports/spotless/

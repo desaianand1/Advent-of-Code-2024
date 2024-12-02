@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.0"
     application
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "aoc24"
@@ -26,15 +26,6 @@ tasks.test {
     }
 }
 
-ktlint {
-    verbose.set(true)
-    outputToConsole.set(true)
-    reporters {
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
-        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
-    }
-}
-
 kotlin {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
@@ -49,11 +40,11 @@ sourceSets {
                 "**/test/**",
                 "template/**",
                 ".gradle/**",
-                "build/**"
+                "build/**",
             )
             include(
                 "*/day*/solution.kt",
-                "utilities/**"
+                "utilities/**",
             )
         }
         resources {
@@ -104,4 +95,30 @@ tasks.register<JavaExec>("day") {
     doFirst {
         println("Running Year $year Day $day solution...")
     }
+}
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        // Disables filename conventions check
+        ktlint().editorConfigOverride(
+            mapOf(
+                "filename" to false,
+                // For newer ktlint versions
+                "ktlint_standard_filename" to "disabled",
+            ),
+        )
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+    kotlinGradle {
+        target("*.gradle.kts")
+        ktlint()
+    }
+}
+
+tasks.register("format") {
+    description = "Format all Kotlin files in the project"
+    dependsOn("spotlessApply")
 }
