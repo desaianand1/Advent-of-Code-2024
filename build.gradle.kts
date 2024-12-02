@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "2.1.0"
     application
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
 group = "aoc24"
@@ -15,7 +16,6 @@ repositories {
 dependencies {
     // Testing
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.3")
     
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("com.google.code.gson:gson:2.11.0")
@@ -23,36 +23,53 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+        showStandardStreams = true
+    }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 sourceSets {
     main {
-        kotlin.srcDirs(
-            "utilities",
-            // Include all year directories dynamically
-            fileTree(".")
-                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
-                .map { it.name }
-        )
-        resources.srcDirs(
-            // Same for resources
-            fileTree(".")
-                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
-                .map { it.name }
-        )
+        kotlin {
+            // Only utilities and solution files
+            srcDir("utilities")
+            srcDir(fileTree(".") {
+                include("*/day*/solution.kt")
+                exclude("utilities/**")  // Ensure we don't double-include utilities
+                exclude("*/day*/test.kt")  // Explicitly exclude test files
+                exclude("**/template*.kt")  // Exclude templates
+            }.map { it.parent })
+        }
+        resources {
+            srcDir(fileTree(".") {
+                include("*/day*/input.txt")
+            }.map { it.parent })
+        }
     }
     test {
-        kotlin.srcDirs(
-            "utilities",
-            // And for test sources
-            fileTree(".")
-                .filter { it.isDirectory && it.name.matches(Regex("\\d{4}")) }
-                .map { it.name }
-        )
+        kotlin {
+            // Only test files
+            srcDir(fileTree(".") {
+                include("*/day*/test.kt")
+                exclude("**/template*.kt")
+            }.map { it.parent })
+        }
     }
 }
 
