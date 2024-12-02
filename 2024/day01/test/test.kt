@@ -1,34 +1,38 @@
-package aocYEAR.dayDAY
+package aoc2024.day01
 
 import org.junit.jupiter.api.Test
 import utilities.readInput
 import kotlin.test.assertEquals
 
-class DayDAYTest {
+class Day01Test {
     private val testInput =
         """
-        // TODO: Add test input here
+        4   3
+        2   5
+        1   3
+        3   9
+        3   3
         """.trimIndent().split("\n")
 
     @Test
     fun `Part 1 with test input`() {
-        assertEquals(0, part1(testInput)) // TODO: Update expected value
+        assertEquals(11, part1(testInput))
     }
 
     @Test
     fun `Part 1 with actual input`() {
-        val input = readInput("YEAR/dayDAY/input.txt")
-        assertEquals(0, part1(input)) // TODO: Update with actual answer
+        val input = readInput("2024/day01/input.txt")
+        assertEquals(936063, part1(input))
     }
 
     @Test
     fun `Part 2 with test input`() {
-        assertEquals(0, part2(testInput)) // TODO: Update expected value
+        assertEquals(31, part2(testInput))
     }
 
     @Test
     fun `Part 2 with actual input`() {
-        val input = readInput("YEAR/dayDAY/input.txt")
+        val input = readInput("2024/day01/input.txt")
         assertEquals(0, part2(input)) // TODO: Update with actual answer
     }
 }

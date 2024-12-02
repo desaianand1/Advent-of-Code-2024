@@ -22,7 +22,7 @@ My attempt at Advent of Code 2024, brushing up on Kotlin while at it
 
 | Day | Name                            | Stars |
 | --- | ------------------------------- | ----- |
-| 01  |                                 |       |
+| 01  | Historian Hysteria              | ⭐ ⭐  |
 | 11  |                                 |       |
 | 12  |                                 |       |
 | 13  |                                 |       |
