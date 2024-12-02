@@ -9,9 +9,9 @@ fun main() {
 }
 
 fun part1(input: List<String>): Int {
-    return 0  // TODO: Implement solution
+    return 0 // TODO: Implement solution
 }
 
 fun part2(input: List<String>): Int {
-    return 0  // TODO: Implement solution
+    return 0 // TODO: Implement solution
 }
