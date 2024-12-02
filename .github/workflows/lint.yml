@@ -1,4 +1,4 @@
-name: Unit Tests
+name: Lint
 
 on:
   push:
@@ -27,25 +27,19 @@ jobs:
     if: needs.should-run.outputs.should-run == 'true'
     uses: ./.github/workflows/reusable-steps.yml
 
-  test:
+  lint:
     needs: [should-run, setup]
     if: needs.should-run.outputs.should-run == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         
-      - name: Run tests
-        run: ./gradlew test
+      - name: Check code formatting
+        run: ./gradlew ktlintCheck
         
-      - name: Upload test results
+      - name: Upload ktlint results
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: test-results
-          path: build/reports/tests/
-        
-      - name: Publish Test Report
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: "**/build/test-results/test/TEST-*.xml"
+          name: ktlint-report
+          path: build/reports/ktlint/
