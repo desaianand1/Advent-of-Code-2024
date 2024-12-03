@@ -115,9 +115,6 @@ To run the code for day `d`, execute the following, replacing `<d>` with the spe
 # For single-digit days, both formats work:
 ./gradlew day -Pyear=2024 -Pday=1
 ./gradlew day -Pyear=2024 -Pday=01
-
-# List all implemented solutions
-./gradlew listSolutions
 ```
 
 ### Testing <a name="testing"></a>
