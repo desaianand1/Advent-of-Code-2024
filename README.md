@@ -45,7 +45,7 @@ My attempt at Advent of Code 2024, brushing up on Kotlin while at it
 
 I solved all of this year's problems in Kotlin. To get started, you'll need to follow the respective installation instructions:
 
-- [JDK 17 or later (use your favorite package manager to do so)](https://openjdk.org/install/)
+- [JDK 21 or later (use your favorite package manager to do so)](https://openjdk.org/install/)
 - [Kotlin 2.1 or later](https://kotlinlang.org/docs/getting-started.html)
 - [Gradle 8.11 or later](https://gradle.org/install/)
 
