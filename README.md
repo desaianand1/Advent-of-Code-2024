@@ -24,8 +24,17 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | Day | Name               | Stars |
 |-----|--------------------|-------|
 | 01  | Historian Hysteria | ⭐ ⭐   |
-| 11  | Red-Nosed Reports  | ⭐ ⭐   |
-| 12  | Mull It Over       | ⭐ ⭐   |
+| 02  | Red-Nosed Reports  | ⭐ ⭐   |
+| 03  | Mull It Over       | ⭐ ⭐   |
+| 04  |                    |       |
+| 05  |                    |       |
+| 06  |                    |       |
+| 07  |                    |       |
+| 08  |                    |       |
+| 09  |                    |       |
+| 10  |                    |       |
+| 11  |                    |       |
+| 12  |                    |       |
 | 13  |                    |       |
 | 14  |                    |       |
 | 15  |                    |       |
