@@ -4,48 +4,50 @@
 
 My attempt at Advent of Code 2024, brushing up on Kotlin while at it
 
-**Disclaimer:** `input.txt`(s) have been omitted as I was made aware that [they are not to be publicly shared](https://adventofcode.com/about#faq_copying).
+**Disclaimer:** `input.txt`(s) have been omitted as I was made aware
+that [they are not to be publicly shared](https://adventofcode.com/about#faq_copying).
 
 ## Table of Contents
 
 - [Overview](#overview)
 - [Setup](#setup)
-  - [Prerequisites](#prereq)
-  - [Session Cookies](#cookie)
-    - [Firefox](#firefox)
-    - [Chrome](#chrome)
-  - [Generating a New Day](#new-day)
+    - [Prerequisites](#prereq)
+    - [Session Cookies](#cookie)
+        - [Firefox](#firefox)
+        - [Chrome](#chrome)
+    - [Generating a New Day](#new-day)
 - [Running Code](#run-code)
-  - [Testing](#testing)
+    - [Testing](#testing)
 
 ## Overview <a name="overview"></a>
 
-| Day | Name                            | Stars |
-| --- | ------------------------------- | ----- |
-| 01  | Historian Hysteria              | ⭐ ⭐  |
-| 11  |                                 |       |
-| 12  |                                 |       |
-| 13  |                                 |       |
-| 14  |                                 |       |
-| 15  |                                 |       |
-| 16  |                                 |       |
-| 17  |                                 |       |
-| 18  |                                 |       |
-| 19  |                                 |       |
-| 20  |                                 |       |
-| 21  |                                 |       |
-| 22  |                                 |       |
-| 23  |                                 |       |
-| 24  |                                 |       |
-| 25  |                                 |       |
+| Day | Name               | Stars |
+|-----|--------------------|-------|
+| 01  | Historian Hysteria | ⭐ ⭐   |
+| 11  | Red-Nosed Reports  | ⭐ ⭐   |
+| 12  |                    |       |
+| 13  |                    |       |
+| 14  |                    |       |
+| 15  |                    |       |
+| 16  |                    |       |
+| 17  |                    |       |
+| 18  |                    |       |
+| 19  |                    |       |
+| 20  |                    |       |
+| 21  |                    |       |
+| 22  |                    |       |
+| 23  |                    |       |
+| 24  |                    |       |
+| 25  |                    |       |
 
 ## Setup <a name="setup"></a>
 
 ### Prerequisites <a name="prereq"></a>
 
-I solved all of this year's problems in Kotlin. To get started, you'll need to follow the respective installation instructions:
+I solved all of this year's problems in Kotlin. To get started, you'll need to follow the respective installation
+instructions:
 
-- [JDK 17 or later (use your favorite package manager to do so)](https://openjdk.org/install/)
+- [JDK 21 or later (use your favorite package manager to do so)](https://openjdk.org/install/)
 - [Kotlin 2.1 or later](https://kotlinlang.org/docs/getting-started.html)
 - [Gradle 8.11 or later](https://gradle.org/install/)
 
@@ -70,17 +72,21 @@ The pre-commit hook will:
 
 ### 🍪 Session Cookies <a name="cookie"></a>
 
-The `new_day.ps1` (or `new_day.sh`, depending on your platform) script uses Advent of Code's authentication [session cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) to auto-fetch the day's input for the current year.
+The `new_day.ps1` (or `new_day.sh`, depending on your platform) script uses Advent of Code's
+authentication [session cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) to auto-fetch the day's input
+for the current year.
 
 To get your own cookie, visit [Advent of Code](https://adventofcode.com/). Once logged in:
 
 #### Firefox <a name="firefox"></a>
 
-- Right-click and select "Inspect". In the "Storage" tab, expand "Cookies" and select `https://adventofcode.com`. Copy the cookie titled "session"
+- Right-click and select "Inspect". In the "Storage" tab, expand "Cookies" and select `https://adventofcode.com`. Copy
+  the cookie titled "session"
 
 #### Chrome <a name="chrome"></a>
 
-- Right-click and select "Inspect Element". In the "Application" tab, under "Storage", expand "Cookies" and select `https://adventofcode.com`. Copy the cookie titled "session"
+- Right-click and select "Inspect Element". In the "Application" tab, under "Storage", expand "Cookies" and select
+  `https://adventofcode.com`. Copy the cookie titled "session"
 
 Paste your session cookie data into a newly created `.env` file. (`.env.example` provides a structural example)
 
@@ -89,8 +95,10 @@ Paste your session cookie data into a newly created `.env` file. (`.env.example`
 - Add your [Advent of Code session cookie](#cookie) to the `.env` file.
 
 - Option 1: Run `new_day.sh` to create the current day's directory
-- Option 2: Run `new_day.sh d` where `d` is a day between `1` - `25` to create that day's directory for the current year (if it doesn't already exist)
-- Option 3: Run `new_day.sh yyyy d` where `yyyy` is a 4-digit year between `2015` and the current year, `d` is a day between `1` - `25` to create that date's directory (if it doesn't already exist)
+- Option 2: Run `new_day.sh d` where `d` is a day between `1` - `25` to create that day's directory for the current
+  year (if it doesn't already exist)
+- Option 3: Run `new_day.sh yyyy d` where `yyyy` is a 4-digit year between `2015` and the current year, `d` is a day
+  between `1` - `25` to create that date's directory (if it doesn't already exist)
 - Navigate to the generated day's directory, equipped with the day's input and some boilerplate Go and Python files
 
 > [!IMPORTANT]

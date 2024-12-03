@@ -15,7 +15,7 @@ class DayDAYTest {
 
     @Test
     fun `Part 1 with actual input`() {
-        if (realInput.isNullOrEmpty()) return
+        if (realInput.isEmpty()) return
         assertEquals(0, part1(realInput)) // TODO: Update with actual answer
     }
 
@@ -26,7 +26,7 @@ class DayDAYTest {
 
     @Test
     fun `Part 2 with actual input`() {
-        if (realInput.isNullOrEmpty()) return
+        if (realInput.isEmpty()) return
         assertEquals(0, part2(realInput)) // TODO: Update with actual answer
     }
 }
