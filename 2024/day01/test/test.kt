@@ -15,8 +15,8 @@ class Day01Test {
 
     @Test
     fun `Part 1 with actual input`() {
-        val input = readInput("2024/day01/input.txt")
-        assertEquals(936063, part1(input))
+        if (realInput.isEmpty()) return
+        assertEquals(936063, part1(realInput))
     }
 
     @Test
@@ -26,7 +26,7 @@ class Day01Test {
 
     @Test
     fun `Part 2 with actual input`() {
-        val input = readInput("2024/day01/input.txt")
-        assertEquals(23150395, part2(input))
+        if (realInput.isEmpty()) return
+        assertEquals(23150395, part2(realInput))
     }
 }
