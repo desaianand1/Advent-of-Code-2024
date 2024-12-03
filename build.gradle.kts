@@ -32,36 +32,33 @@ kotlin {
     }
 }
 
+tasks.withType<Copy> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.named("compileKotlin") {
+    dependsOn("processResources")
+}
+
 sourceSets {
     main {
         kotlin {
-            srcDirs("utilities", ".")
-            exclude(
-                "**/test/**",
-                "template/**",
-                ".gradle/**",
-                "build/**",
-            )
-            include(
-                "*/day*/solution.kt",
-                "utilities/**",
-            )
+            srcDirs("src/main/kotlin")
+            exclude("**/templates/**")
         }
         resources {
-            srcDir(".")
-            include("*/day*/input.txt")
-            exclude("**/test/**")
+            srcDirs("src/main/kotlin")
+            include("**/day*/input.txt")
+            exclude("**/templates/**")
         }
     }
     test {
         kotlin {
-            srcDir(".")
-            include("*/day*/test/test.kt")
-            exclude("template/**")
+            srcDirs("src/test/kotlin")
         }
         resources {
-            srcDir(".")
-            include("*/day*/test/test_input.txt")
+            srcDirs("src/test/kotlin")
+            include("**/day*/test_input*.txt")
         }
     }
 }
@@ -88,7 +85,7 @@ tasks.register<JavaExec>("day") {
     // Verify day is between 1 and 25
     require(day.toInt() in 1..25) { "Day must be between 1 and 25" }
 
-    mainClass.set("aoc$year.day$day.SolutionKt")
+    mainClass.set("$year.day$day.SolutionKt")
     classpath = sourceSets["main"].runtimeClasspath
     standardInput = System.`in`
 
@@ -104,8 +101,10 @@ spotless {
         ktlint().editorConfigOverride(
             mapOf(
                 "filename" to false,
+                "package-name" to false,
                 // For newer ktlint versions
                 "ktlint_standard_filename" to "disabled",
+                "ktlint_standard_package-name" to "disabled",
             ),
         )
         trimTrailingWhitespace()

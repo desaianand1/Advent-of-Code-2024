@@ -75,6 +75,6 @@ kotlin-ide/
 
 # Advent of Code specific
 **/input.txt
-!**/test_input.txt
+!**/test_input*.txt
 test-output/
 reports/

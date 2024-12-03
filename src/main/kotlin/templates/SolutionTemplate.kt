@@ -1,4 +1,4 @@
-package aocYEAR.dayDAY
+package `YEAR`.dayDAY
 
 import utilities.readInput
 

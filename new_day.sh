@@ -29,71 +29,76 @@ if ! [[ $selected_day =~ ^[1-9]$|^1[0-9]$|^2[0-5]$ ]]; then
 fi
 
 # Pad day with leading zero if necessary
-padded_day=$(printf "%02d" $selected_day)
+padded_day=$(printf "%02d" "$selected_day")
 
 function new_day {
     local year=$1
     local day=$2
-    local padded_day=$(printf "%02d" $day)
+    local padded_day=$(printf "%02d" "$day")
     local domain="adventofcode.com"
     local input_url="https://$domain/$year/day/$day/input"
 
     # Create directory structure
-    local day_dir="$year/day$padded_day"
-    local test_dir="$day_dir/test"
-    mkdir -p $day_dir/test
+    local day_dir="src/main/kotlin/$year/day$padded_day"
+    local test_dir="src/test/kotlin/$year/day$padded_day"
+    local templates_dir="src/main/kotlin/templates"
+
+    mkdir -p "$day_dir"
+    mkdir -p "$test_dir"
 
     # Define file paths
     local input_file="$day_dir/input.txt"
-    local solution_file="$day_dir/solution.kt"
-    local test_file="$day_dir/test/test.kt"
-    local test_input_file="$day_dir/test/test_input.txt"
+    local solution_file="$day_dir/Solution.kt"
+    local test_file="$test_dir/SolutionTest.kt"
+    local test_input_file="$test_dir/test_input.txt"
+    local solution_template_file="$templates_dir/SolutionTemplate.kt"
+    local test_template_file="$templates_dir/TestTemplate.kt"
 
-    if [ -f $input_file ]; then
+    if [ -f "$input_file" ]; then
         echo "Cannot create input file since $input_file already exists!"
         exit 1
     fi
 
     cookie_val=$(get_cookie)
     # Create input file
-    new_day_input_file $input_url $cookie_val $input_file
+    new_day_input_file "$input_url" "$cookie_val" "$input_file"
 
     # Create Kotlin solution file from template
-    if [ ! -f $solution_file ]; then
-        cp templates/soln_template.kt $solution_file
+    if [ ! -f "$solution_file" ]; then
+        cp $solution_template_file "$solution_file"
         # Update package and file names
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # macOS
-            sed -i '' "s/YEAR/$year/g" $solution_file
-            sed -i '' "s/DAY/$padded_day/g" $solution_file
+            sed -i '' "s/YEAR/$year/g" "$solution_file"
+            sed -i '' "s/DAY/$padded_day/g" "$solution_file"
         else
             # Linux/Unix
-            sed -i "s/YEAR/$year/g" $solution_file
-            sed -i "s/DAY/$padded_day/g" $solution_file
+            sed -i "s/YEAR/$year/g" "$solution_file"
+            sed -i "s/DAY/$padded_day/g" "$solution_file"
         fi
         echo "Created Kotlin solution file: $solution_file"
     fi
 
     # Create test file from template
-    if [ ! -f $test_file ]; then
-        cp templates/test_template.kt $test_file
+    if [ ! -f "$test_file" ]; then
+        cp $test_template_file "$test_file"
         # Update package and file names
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # macOS
-            sed -i '' "s/YEAR/$year/g" $test_file
-            sed -i '' "s/DAY/$padded_day/g" $test_file
+            sed -i '' "s/YEAR/$year/g" "$test_file"
+            sed -i '' "s/DAY/$padded_day/g" "$test_file"
         else
             # Linux/Unix
-            sed -i "s/YEAR/$year/g" $test_file
-            sed -i "s/DAY/$padded_day/g" $test_file
+            sed -i "s/YEAR/$year/g" "$test_file"
+            sed -i "s/DAY/$padded_day/g" "$test_file"
         fi
         echo "Created test file: $test_file"
     fi
 
      # Create test input file if it doesn't exist
-    if [ ! -f $test_input_file ]; then
+    if [ ! -f "$test_input_file" ]; then
         # Create an empty test input file that can be filled with example data
-        touch $test_input_file
+        touch "$test_input_file"
         echo "Created test input file: $test_input_file"
         echo "Remember to add example input data to $test_input_file"
     fi
@@ -119,4 +124,4 @@ function get_cookie {
 }
 
 # Entry point
-new_day $selected_year $selected_day
+new_day "$selected_year" "$selected_day"

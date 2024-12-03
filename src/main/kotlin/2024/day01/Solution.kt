@@ -1,4 +1,4 @@
-package aoc2024.day01
+package `2024`.day01
 
 import utilities.readInput
 

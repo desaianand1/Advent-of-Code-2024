@@ -1,9 +1,9 @@
-package aoc2024.day03
+package `2024`.day03
 
 import utilities.readInput
 
 fun main() {
-    val input = readInput("2024/day03/test/input.txt")
+    val input = readInput("2024/day03/input.txt")
     println("Part 1: ${part1(input)}")
     println("Part 2: ${part2(input)}")
 }

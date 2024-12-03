@@ -1,12 +1,12 @@
-package aoc2024.day03
+package `2024`.day03
 
 import org.junit.jupiter.api.Test
 import utilities.readInput
 import kotlin.test.assertEquals
 
 class Day03Test {
-    private val testInput = readInput("2024/day03/test/test_input.txt")
-    private val testInput2 = readInput("2024/day03/test/test_input-2.txt")
+    private val testInput = readInput("2024/day03/test_input.txt")
+    private val testInput2 = readInput("2024/day03/test_input-2.txt")
     private val realInput = readInput("2024/day03/input.txt")
 
     @Test

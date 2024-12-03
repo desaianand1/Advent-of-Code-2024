@@ -1,4 +1,4 @@
-package aoc2024.day02
+package `2024`.day02
 
 import utilities.readInput
 import kotlin.math.abs
