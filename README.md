@@ -72,7 +72,7 @@ The pre-commit hook will:
 
 ### 🍪 Session Cookies <a name="cookie"></a>
 
-The `new_day.ps1` (or `new_day.sh`, depending on your platform) script uses Advent of Code's
+The `new_day.sh` script uses Advent of Code's
 authentication [session cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) to auto-fetch the day's input
 for the current year.
 
@@ -123,5 +123,5 @@ Solutions are verified against known answers using JUnit tests. To run tests:
 
 ```sh
 ./gradlew test              # Run all tests
-./gradlew test --tests "aoc2024.day01.*"  # Run specific day's tests
+./gradlew test --tests "2024.day01.*"  # Run specific day's tests
 ```
