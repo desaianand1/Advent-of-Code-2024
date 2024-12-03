@@ -99,7 +99,7 @@ Paste your session cookie data into a newly created `.env` file. (`.env.example`
   year (if it doesn't already exist)
 - Option 3: Run `new_day.sh yyyy d` where `yyyy` is a 4-digit year between `2015` and the current year, `d` is a day
   between `1` - `25` to create that date's directory (if it doesn't already exist)
-- Navigate to the generated day's directory, equipped with the day's input and some boilerplate Go and Python files
+- Navigate to the generated day's directory, equipped with the day's input and some boilerplate Kotlin files
 
 > [!IMPORTANT]
 > This script was only intended to be run during the duration of Advent of Code (i.e. Dec 1 through 25 of a given year).
