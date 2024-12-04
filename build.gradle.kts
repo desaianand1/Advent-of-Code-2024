@@ -102,9 +102,11 @@ spotless {
             mapOf(
                 "filename" to false,
                 "package-name" to false,
+                "value-argument-comment" to false,
                 // For newer ktlint versions
                 "ktlint_standard_filename" to "disabled",
                 "ktlint_standard_package-name" to "disabled",
+                "ktlint_standard_value-argument-comment" to "disabled",
             ),
         )
         trimTrailingWhitespace()
