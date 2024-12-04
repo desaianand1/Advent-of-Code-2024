@@ -26,7 +26,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 01  | Historian Hysteria | ⭐ ⭐   |
 | 02  | Red-Nosed Reports  | ⭐ ⭐   |
 | 03  | Mull It Over       | ⭐ ⭐   |
-| 04  |                    |       |
+| 04  | Ceres Search       | ⭐ ⭐   |
 | 05  |                    |       |
 | 06  |                    |       |
 | 07  |                    |       |

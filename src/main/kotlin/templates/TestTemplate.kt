@@ -5,7 +5,7 @@ import utilities.readInput
 import kotlin.test.assertEquals
 
 class DayDAYTest {
-    private val testInput = readInput("YEAR/dayDAY/test/test_input.txt")
+    private val testInput = readInput("YEAR/dayDAY/test_input.txt")
     private val realInput = readInput("YEAR/dayDAY/input.txt")
 
     @Test
