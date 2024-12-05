@@ -1,0 +1,48 @@
+#!/bin/bash
+
+echo "Running pre-commit hook..."
+
+EXIT_CODE=0
+
+# Save currently staged files
+git stash -q --keep-index
+
+echo "Running code formatting..."
+./gradlew spotlessApply
+FORMAT_EXIT_CODE=$?
+
+if [ $FORMAT_EXIT_CODE -ne 0 ]; then
+    echo "❌ Formatting failed. Please check the errors above."
+    EXIT_CODE=1
+else
+    echo "✅ Formatting successful!"
+
+    # Check if any files were modified by formatting
+    if ! git diff --quiet; then
+        echo "⚠️ Some files were reformatted. Please review and stage the changes."
+        git status --short
+        EXIT_CODE=1
+    fi
+fi
+
+echo "Running tests..."
+./gradlew test
+TEST_EXIT_CODE=$?
+
+if [ $TEST_EXIT_CODE -ne 0 ]; then
+    echo "❌ Tests failed. Please fix failing tests."
+    EXIT_CODE=1
+else
+    echo "✅ All tests passed!"
+fi
+
+# Restore stashed changes
+git stash pop -q
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "❌ Pre-commit hook failed. Please fix the issues and try again."
+else
+    echo "✅ Pre-commit hook completed successfully!"
+fi
+
+exit $EXIT_CODE
