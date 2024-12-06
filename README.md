@@ -28,7 +28,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 03  | Mull It Over       | ⭐ ⭐   |
 | 04  | Ceres Search       | ⭐ ⭐   |
 | 05  | Print Queue        | ⭐ ⭐   |
-| 06  |                    |       |
+| 06  | Guard Gallivant    | ⭐ ⭐   |
 | 07  |                    |       |
 | 08  |                    |       |
 | 09  |                    |       |
