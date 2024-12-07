@@ -1,6 +1,7 @@
 package `2024`.day01
 
 import utilities.readInput
+import kotlin.math.abs
 
 fun main() {
     val input = readInput("2024/day01/input.txt")
@@ -28,7 +29,7 @@ fun part1(input: List<String>): Int {
 
     var totalDistance = 0
     for (i in sortedLeft.indices) {
-        val distance = Math.abs(sortedLeft[i] - sortedRight[i])
+        val distance = abs(sortedLeft[i] - sortedRight[i])
         totalDistance += distance
     }
 
