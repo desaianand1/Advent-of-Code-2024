@@ -31,7 +31,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 06  | Guard Gallivant       | ⭐ ⭐   |
 | 07  | Bridge Repair         | ⭐ ⭐   |
 | 08  | Resonant Collinearity | ⭐ ⭐   |
-| 09  |                       |       |
+| 09  | Disk Fragmenter       | ⭐ ⭐   |
 | 10  |                       |       |
 | 11  |                       |       |
 | 12  |                       |       |
