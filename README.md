@@ -33,7 +33,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 08  | Resonant Collinearity | ⭐ ⭐   |
 | 09  | Disk Fragmenter       | ⭐ ⭐   |
 | 10  | Hoof It               | ⭐ ⭐   |
-| 11  |                       |       |
+| 11  | Plutonian Pebbles     | ⭐ ⭐   |
 | 12  |                       |       |
 | 13  |                       |       |
 | 14  |                       |       |
