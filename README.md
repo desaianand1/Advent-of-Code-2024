@@ -35,7 +35,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 10  | Hoof It               | ⭐ ⭐   |
 | 11  | Plutonian Pebbles     | ⭐ ⭐   |
 | 12  |                       |       |
-| 13  |                       |       |
+| 13  | Claw Contraption      | ⭐ ⭐   |
 | 14  |                       |       |
 | 15  |                       |       |
 | 16  |                       |       |
