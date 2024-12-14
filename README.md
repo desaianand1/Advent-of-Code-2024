@@ -36,7 +36,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 11  | Plutonian Pebbles     | ⭐ ⭐   |
 | 12  | Garden Groups         | ⭐ ⭐   |
 | 13  | Claw Contraption      | ⭐ ⭐   |
-| 14  |                       |       |
+| 14  | Restroom Redoubt      | ⭐ ⭐   |
 | 15  |                       |       |
 | 16  |                       |       |
 | 17  |                       |       |
