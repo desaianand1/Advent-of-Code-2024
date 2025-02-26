@@ -38,7 +38,7 @@ that [they are not to be publicly shared](https://adventofcode.com/about#faq_cop
 | 13  | Claw Contraption      | ⭐ ⭐   |
 | 14  | Restroom Redoubt      | ⭐ ⭐   |
 | 15  | Warehouse Woes        | ⭐ ⭐   |
-| 16  |                       |       |
+| 16  |  Reindeer Maze        | ⭐ ⭐   |
 | 17  |                       |       |
 | 18  |                       |       |
 | 19  |                       |       |
