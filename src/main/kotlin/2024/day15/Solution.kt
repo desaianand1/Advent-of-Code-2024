@@ -1,6 +1,6 @@
 package `2024`.day15
 
-import `2024`.day15.Direction.values
+import `2024`.day15.Direction.entries
 import utilities.readInput
 
 fun main() {
@@ -45,7 +45,7 @@ enum class Direction(val char: Char, val dx: Int, val dy: Int) {
     ;
 
     companion object {
-        fun fromChar(c: Char): Direction = values().first { it.char == c }
+        fun fromChar(c: Char): Direction = entries.first { it.char == c }
     }
 }
 
